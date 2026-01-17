@@ -8,7 +8,7 @@ describe('Selectors practice', () => {
         await $('.header_signin').click(); //21.5s
     });
 
-    it.only('XPath - get by class', async () => {
+    it('XPath - get by class', async () => {
         await browser.url(
             'https://' + process.env.CREDENTIALS + 'qauto.forstudy.space/',
         );
@@ -16,5 +16,12 @@ describe('Selectors practice', () => {
             '//button[@class="hero-descriptor_btn btn btn-primary"]',
         ).click(); // 16.4s
         // await $('//button[text()="Sign In"]').click(); // 25.4s
+    });
+
+    it.only('By text', async () => {
+        await browser.url(
+            'https://' + process.env.CREDENTIALS + 'qauto.forstudy.space/',
+        );
+        await $('=Sign In').click(); // 16.4s
     });
 });
