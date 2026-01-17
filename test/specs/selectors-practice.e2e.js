@@ -18,10 +18,17 @@ describe('Selectors practice', () => {
         // await $('//button[text()="Sign In"]').click(); // 25.4s
     });
 
-    it.only('By text', async () => {
+    it('By text', async () => {
         await browser.url(
             'https://' + process.env.CREDENTIALS + 'qauto.forstudy.space/',
         );
         await $('=Sign In').click(); // 16.4s
+    });
+
+    it('By text partly', async () => {
+        await browser.url(
+            'https://' + process.env.CREDENTIALS + 'qauto.forstudy.space/',
+        );
+        await $('*=Sign I').click(); // 15.8s
     });
 });
