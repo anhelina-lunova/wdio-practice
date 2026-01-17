@@ -31,4 +31,25 @@ describe('Selectors practice', () => {
         );
         await $('*=Sign I').click(); // 15.8s
     });
+
+    it.only('Navbar element selection', async () => {
+        await browser.url(
+            'https://' + process.env.CREDENTIALS + 'qauto.forstudy.space/',
+        );
+        console.log(await $('nav>*').getText());
+
+        const navBarElements = await $$('nav>*');
+
+        for (const element of navBarElements) {
+            console.log(await element.getText());
+        } // 21.3s
+
+        // navBarElements.forEach((element) => {
+        //     console.log(element.getText());
+        // }); // in this case the promises returned instead of values
+
+        console.log(await navBarElements.length);
+
+        await browser.pause(5000);
+    });
 });
