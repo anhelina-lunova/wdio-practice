@@ -1,6 +1,6 @@
 // import { expect, browser, $ } from '@wdio/globals';
 
-describe('Actions practice', () => {
+describe.skip('Actions practice', () => {
     it('Click', async () => {
         await browser.url(
             'https://www.rapidtables.com/tools/click-counter.html',
@@ -35,7 +35,7 @@ describe('Actions practice', () => {
         await browser.pause(5000);
     });
 
-    it.only('Set, clear value - email field', async () => {
+    it('Set, clear value - email field', async () => {
         const userEmail = 'testuser@gmail.com';
 
         await browser.url(
@@ -51,4 +51,8 @@ describe('Actions practice', () => {
         const inputValue = await emailField.getValue();
         await expect(inputValue).toEqual('testuser@gmail.com');
     });
+});
+
+describe('Form validation', () => {
+    it('Set, clear value - email field', async () => {});
 });
