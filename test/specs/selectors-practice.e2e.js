@@ -32,7 +32,7 @@ describe('Selectors practice', () => {
         await $('*=Sign I').click(); // 15.8s
     });
 
-    it.only('Navbar element selection', async () => {
+    it('Navbar element selection', async () => {
         await browser.url(
             'https://' + process.env.CREDENTIALS + 'qauto.forstudy.space/',
         );
