@@ -14,6 +14,7 @@
         "dotenv": "^17.2.3"
     },
     "scripts": {
-        "wdio": "wdio run ./wdio.conf.js"
+        "wdio": "wdio run ./wdio.conf.js",
+        "wdio:pom": "wdio run ./wdio.conf.js --spec ./test/specs/pom-tests/**/*.e2e.js"
     }
 }
