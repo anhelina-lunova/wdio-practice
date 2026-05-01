@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "types": [
+            "node",
+            "@wdio/globals/types",
+            "@wdio/mocha-framework",
+            "expect-webdriverio"
+        ],
+        "paths": {
+            "#test/*": ["./test/*"],
+            "#pages/*": ["./test/page-objects/pages/*"]
+        }
+    },
+    "include": ["test/**/*"],
+    "exclude": ["node_modules", "dist"]
+}

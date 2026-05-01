@@ -1,6 +1,10 @@
 {
     "name": "wdio-practice",
     "type": "module",
+    "imports": {
+        "#pages/*": "./test/page-objects/pages/*",
+        "#test/*": "./test/*"
+    },
     "devDependencies": {
         "@wdio/cli": "^9.23.0",
         "@wdio/local-runner": "^9.23.0",
