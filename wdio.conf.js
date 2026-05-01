@@ -50,6 +50,32 @@ export const config = {
     capabilities: [
         {
             browserName: 'chrome',
+            webSocketUrl: false, // This parameter tells WebdriverIO not to open a special channel (WebSocket) for bidirectional communication with the browser. This disables the BiDi protocol, which often causes delays as it tries to track all events on the page at once.
+            'wdio:enforceWebDriverClassic': true, // This parameter tells WebdriverIO to use the verified HTTP (Classic) protocol. It is simpler, more predictable and, as we have seen in your logs, much faster for ordinary UI tests.
+            pageLoadStrategy: 'eager', // This is a "eager" loading strategy.
+            // - Normal (default): It waits until all resources (images, styles, ads, analytics) are loaded.
+            // - Eager: It gives the signal to work as soon as the HTML (DOM) is loaded. This saves a lot of time on sites with heavy external scripts (like Facebook or Google Ads).
+            'goog:chromeOptions': {
+                args: [
+                    '--no-sandbox', // This disables the sandbox for the browser. This is a security measure in Chrome, but in automation environments (especially in Docker or on Linux servers) it often妨碍浏览器启动. It is added for stability of startup.
+                    '--disable-dev-shm-usage', // By default, Chrome uses /dev/shm (shared memory) for its needs. In containers or on virtual machines this space is often too small, which causes "tabs to fall" This flag forces Chrome to use a regular temporary folder.
+                    // 1. Remove banner "Chrome is being controlled by automated test software".
+                    // Note: In new versions of Chrome it still appears sometimes,
+                    // because Google is fighting against automation, but this flag is a de-facto standard.
+                    // Google is fighting against automation, but this flag is a de-facto standard.
+                    '--disable-infobars', // This tries to hide the text "Chrome is being controlled by automated test software". Although in the latest versions of Chrome Google makes it more difficult, the flag still helps to avoid some shifts of elements through this banner.
+
+                    // 2. Run browser in headless mode.
+                    // Tests run faster, because resources are not spent on rendering graphics.
+                    // Ideal for CI/CD servers, where there is no monitor.
+                    // '--headless',
+
+                    // 3. Disable GPU usage.
+                    // Often used together with headless mode, because on servers
+                    // often there is no GPU. This prevents rendering errors in environments without a monitor.
+                    '--disable-gpu', // This disables the use of the graphical processor (video card). Since the tests do not need 3D graphics, and on servers (CI/CD) video cards are often completely absent, this prevents rendering errors and saves system resources.
+                ],
+            },
         },
     ],
 
