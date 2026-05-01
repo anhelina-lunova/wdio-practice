@@ -7,9 +7,9 @@ describe('Actions practice', () => {
         );
 
         const cypherblat = await $('//input[@type="number" and @id="count"]');
-        await expect(cypherblat).toHaveAttr('value', '0');
+        await expect(cypherblat).toHaveValue('0');
         await $('#addbtn').click();
-        await expect(cypherblat).toHaveAttr('value', '1');
+        await expect(cypherblat).toHaveValue('1');
     });
 
     it('Double Click', async () => {
@@ -17,9 +17,9 @@ describe('Actions practice', () => {
             'https://www.rapidtables.com/tools/click-counter.html',
         );
         const cypherblat = await $('//input[@type="number" and @id="count"]');
-        await expect(cypherblat).toHaveAttr('value', '0');
+        await expect(cypherblat).toHaveValue('0');
         await $('#addbtn').doubleClick();
-        await expect(cypherblat).toHaveAttr('value', '2');
+        await expect(cypherblat).toHaveValue('2');
     });
 
     it('Right Click', async () => {
@@ -28,10 +28,10 @@ describe('Actions practice', () => {
         );
 
         const cypherblat = await $('//input[@type="number" and @id="count"]');
-        await expect(cypherblat).toHaveAttr('value', '0');
+        await expect(cypherblat).toHaveValue('0');
         // 0 - left, 1 - middle, 2 - right
         await $('#addbtn').click({ button: 'right' });
-        await expect(cypherblat).toHaveAttr('value', '0');
+        await expect(cypherblat).toHaveValue('0');
     });
 
     it('Set, clear value - email field', async () => {
