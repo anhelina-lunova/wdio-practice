@@ -12,32 +12,34 @@ describe('Form validation - incorrect data', () => {
     });
 
     it('Email field - email is empty', async () => {
-        await SignInForm.emailField.setValue('');
-        await SignInForm.emailLabel.click();
-        await expect(SignInForm.emailErrorMessage).toHaveText('Email required');
+        await SignInForm.setEmail('');
+        await SignInForm.clickEmailLabel();
+        await expect(await SignInForm.getEmailErrorMessageText()).toBe(
+            'Email required',
+        );
     });
 
     it('Password field - password is empty', async () => {
-        await SignInForm.passwordField.setValue('');
-        await SignInForm.passwordLabel.click();
-        await expect(SignInForm.passwordErrorMessage).toHaveText(
+        await SignInForm.setPassword('');
+        await SignInForm.clickPasswordLabel();
+        await expect(await SignInForm.getPasswordErrorMessageText()).toBe(
             'Password required',
         );
     });
 
     it('Email field - incorrect format', async () => {
-        await SignInForm.emailField.setValue('testuser');
-        await SignInForm.emailLabel.click();
-        await expect(SignInForm.emailErrorMessage).toHaveText(
+        await SignInForm.setEmail('testuser');
+        await SignInForm.clickEmailLabel();
+        await expect(await SignInForm.getEmailErrorMessageText()).toBe(
             'Email is incorrect',
         );
     });
 
     it('Email and Password fields - incorrect data', async () => {
-        await SignInForm.emailField.setValue('testuser@gmail.com');
-        await SignInForm.passwordField.setValue('testpassword');
-        await SignInForm.submitButton.click();
-        await expect(SignInForm.errorMessage).toHaveText(
+        await SignInForm.setEmail('testuser@gmail.com');
+        await SignInForm.setPassword('testpassword');
+        await SignInForm.clickSubmitButton();
+        await expect(await SignInForm.getWrongDataErrorMessage()).toBe(
             'Wrong email or password',
         );
     });
@@ -45,9 +47,9 @@ describe('Form validation - incorrect data', () => {
 
 describe('Form validation - correct data', () => {
     it('Email and Password fields - incorrect data', async () => {
-        await SignInForm.emailField.setValue(process.env.USER_EMAIL);
-        await SignInForm.passwordField.setValue(process.env.USER_PASSWORD);
-        await SignInForm.submitButton.click();
+        await SignInForm.setEmail(process.env.USER_EMAIL);
+        await SignInForm.setPassword(process.env.USER_PASSWORD);
+        await SignInForm.clickSubmitButton();
         await $('.panel-page').waitForDisplayed();
         await expect(await browser.getUrl()).toEqual(
             'https://' +
@@ -61,9 +63,9 @@ describe.skip('Garage Page', () => {
     it('Add a car', async () => {
         const addCarModelDropdown = await $('#addCarModel');
 
-        await SignInForm.emailField.setValue(process.env.USER_EMAIL);
-        await SignInForm.passwordField.setValue(process.env.USER_PASSWORD);
-        await SignInForm.submitButton.click();
+        await SignInForm.setEmail(process.env.USER_EMAIL);
+        await SignInForm.setPassword(process.env.USER_PASSWORD);
+        await SignInForm.clickSubmitButton();
         await $('.panel-page').waitForDisplayed();
         await expect(await browser.getUrl()).toEqual(
             'https://' +
