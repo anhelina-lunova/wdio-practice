@@ -3,6 +3,7 @@
     "type": "module",
     "imports": {
         "#pages/*": "./test/page-objects/pages/*",
+        "#forms/*": "./test/page-objects/forms/*",
         "#test/*": "./test/*"
     },
     "devDependencies": {
