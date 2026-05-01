@@ -49,6 +49,14 @@ describe('Actions practice', () => {
         const inputValue = await emailField.getValue();
         await expect(inputValue).toEqual('testuser@gmail.com');
     });
+
+    it('Checkbox', async () => {
+        await browser.url('https://practice.expandtesting.com/checkboxes');
+        await $('#checkbox1').click();
+        await expect(await $('#checkbox1')).toBeChecked();
+        await $('#checkbox1').click();
+        await expect(await $('#checkbox1')).not.toBeChecked();
+    });
 });
 
 describe('Form validation - incorrect data', () => {
