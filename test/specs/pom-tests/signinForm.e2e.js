@@ -2,7 +2,7 @@
 
 import GaragePage from '#pages/GaragePage.js';
 import HomePage from '#pages/HomePage.js';
-import SignInForm from '#test/page-objects/forms/SignInForm.js';
+import SignInForm from '#forms/SignInForm.js';
 
 describe('Form validation', () => {
     beforeEach('Login', async () => {
