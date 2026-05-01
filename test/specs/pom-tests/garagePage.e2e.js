@@ -15,8 +15,8 @@ describe('Garage Page', () => {
         await expect(await browser.getUrl()).toContain('/panel/garage');
     });
 
-    it('Add a car', async () => {
+    it('Add a car - BMW X5', async () => {
         await GaragePage.addCarByBrandAndModel('BMW', 'X5', '50');
-        await expect(GaragePage.carName).toHaveText('BMW X5');
+        await GaragePage.verifyLastAddedCar('BMW X5');
     });
 });

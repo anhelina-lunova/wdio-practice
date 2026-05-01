@@ -23,8 +23,9 @@ class GaragePage {
         return $('.modal-footer .btn-primary');
     }
 
-    get carName() {
-        return $('.car_name');
+    get lastAddedCarName() {
+        // return $('.car_name');
+        return $('.car-item:first-child .car_name');
     }
 
     // const addCarModelDropdown = await $('#addCarModel');
@@ -54,6 +55,10 @@ class GaragePage {
         expect(selectedText).toBe(model);
         await this.mileageField.setValue(mileage);
         await this.addCarButton.click();
+    }
+
+    async verifyLastAddedCar(text) {
+        expect(await this.lastAddedCarName.getText()).toBe(text);
     }
 }
 
