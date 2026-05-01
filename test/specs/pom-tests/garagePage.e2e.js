@@ -19,4 +19,9 @@ describe('Garage Page', () => {
         await GaragePage.addCarByBrandAndModel('BMW', 'X5', '50');
         await GaragePage.verifyLastAddedCar('BMW X5');
     });
+
+    it('Add a car - Ford Focus', async () => {
+        await GaragePage.addCarByBrandAndModel('Ford', 'Focus', '100');
+        await GaragePage.verifyLastAddedCar('Ford Focus');
+    });
 });

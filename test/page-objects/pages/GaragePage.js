@@ -58,6 +58,7 @@ class GaragePage {
     }
 
     async verifyLastAddedCar(text) {
+        await browser.pause(500);
         expect(await this.lastAddedCarName.getText()).toBe(text);
     }
 }
