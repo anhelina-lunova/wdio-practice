@@ -15,6 +15,8 @@
     },
     "scripts": {
         "wdio": "wdio run ./wdio.conf.js",
-        "wdio:pom": "wdio run ./wdio.conf.js --spec ./test/specs/pom-tests/**/*.e2e.js"
+        "wdio:pom": "wdio run ./wdio.conf.js --spec ./test/specs/pom-tests/**/*.e2e.js",
+        "wdio:signin": "wdio run ./wdio.conf.js --spec ./test/specs/pom-tests/signinForm.e2e.js",
+        "wdio:garage": "wdio run ./wdio.conf.js --spec ./test/specs/pom-tests/garagePage.e2e.js"
     }
 }
