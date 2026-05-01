@@ -1,6 +1,7 @@
 // import { expect, browser, $ } from '@wdio/globals';
 
 import HomePage from '#pages/HomePage.js';
+import SignInForm from '#test/page-objects/forms/SignInForm.js';
 
 describe('Form validation - incorrect data', () => {
     beforeEach('Login', async () => {
@@ -11,63 +12,42 @@ describe('Form validation - incorrect data', () => {
     });
 
     it('Email field - email is empty', async () => {
-        const emailField = await $('#signinEmail');
-        const emailErrorMessage = await $(
-            'form>div:nth-child(1) .invalid-feedback',
-        );
-        const emailLabel = await $('label[for="signinEmail"]');
-
-        await emailField.setValue('');
-        await emailLabel.click();
-        await expect(emailErrorMessage).toHaveText('Email required');
+        await SignInForm.emailField.setValue('');
+        await SignInForm.emailLabel.click();
+        await expect(SignInForm.emailErrorMessage).toHaveText('Email required');
     });
 
     it('Password field - password is empty', async () => {
-        const passwordField = await $('#signinPassword');
-        const passwordErrorMessage = await $(
-            'form>div:nth-child(2) .invalid-feedback',
+        await SignInForm.passwordField.setValue('');
+        await SignInForm.passwordLabel.click();
+        await expect(SignInForm.passwordErrorMessage).toHaveText(
+            'Password required',
         );
-        const passwordLabel = await $('label[for="signinPassword"]');
-
-        await passwordField.setValue('');
-        await passwordLabel.click();
-        await expect(passwordErrorMessage).toHaveText('Password required');
     });
 
     it('Email field - incorrect format', async () => {
-        const emailField = await $('#signinEmail');
-        const emailErrorMessage = await $(
-            'form>div:nth-child(1) .invalid-feedback',
+        await SignInForm.emailField.setValue('testuser');
+        await SignInForm.emailLabel.click();
+        await expect(SignInForm.emailErrorMessage).toHaveText(
+            'Email is incorrect',
         );
-        const emailLabel = await $('label[for="signinEmail"]');
-
-        await emailField.setValue('testuser');
-        await emailLabel.click();
-        await expect(emailErrorMessage).toHaveText('Email is incorrect');
     });
 
     it('Email and Password fields - incorrect data', async () => {
-        const emailField = await $('#signinEmail');
-        const passwordField = await $('#signinPassword');
-        const submitButton = await $('.modal-content .btn-primary');
-        const errorMessage = await $('.alert-danger');
-
-        await emailField.setValue('testuser@gmail.com');
-        await passwordField.setValue('testpassword');
-        await submitButton.click();
-        await expect(errorMessage).toHaveText('Wrong email or password');
+        await SignInForm.emailField.setValue('testuser@gmail.com');
+        await SignInForm.passwordField.setValue('testpassword');
+        await SignInForm.submitButton.click();
+        await expect(SignInForm.errorMessage).toHaveText(
+            'Wrong email or password',
+        );
     });
 });
 
 describe('Form validation - correct data', () => {
     it('Email and Password fields - incorrect data', async () => {
-        const emailField = await $('#signinEmail');
-        const passwordField = await $('#signinPassword');
-        const submitButton = await $('.modal-content .btn-primary');
-
-        await emailField.setValue(process.env.USER_EMAIL);
-        await passwordField.setValue(process.env.USER_PASSWORD);
-        await submitButton.click();
+        await SignInForm.emailField.setValue(process.env.USER_EMAIL);
+        await SignInForm.passwordField.setValue(process.env.USER_PASSWORD);
+        await SignInForm.submitButton.click();
         await $('.panel-page').waitForDisplayed();
         await expect(await browser.getUrl()).toEqual(
             'https://' +
@@ -79,15 +59,11 @@ describe('Form validation - correct data', () => {
 
 describe.skip('Garage Page', () => {
     it('Add a car', async () => {
-        const emailField = await $('#signinEmail');
-        const passwordField = await $('#signinPassword');
-        const submitButton = await $('.modal-content .btn-primary');
-
         const addCarModelDropdown = await $('#addCarModel');
 
-        await emailField.setValue(process.env.USER_EMAIL);
-        await passwordField.setValue(process.env.USER_PASSWORD);
-        await submitButton.click();
+        await SignInForm.emailField.setValue(process.env.USER_EMAIL);
+        await SignInForm.passwordField.setValue(process.env.USER_PASSWORD);
+        await SignInForm.submitButton.click();
         await $('.panel-page').waitForDisplayed();
         await expect(await browser.getUrl()).toEqual(
             'https://' +
